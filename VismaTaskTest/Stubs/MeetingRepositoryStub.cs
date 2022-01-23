@@ -7,9 +7,10 @@ namespace VismaTaskTest.Stubs;
 
 public class MeetingRepositoryStub : IMeetingRepository
 {
-    public List<Meeting> GetAll()
+    private List<Meeting> _meetings;
+    public MeetingRepositoryStub()
     {
-        return new List<Meeting>()
+        _meetings = new List<Meeting>()
         {
             new Meeting(
                 "First",
@@ -19,7 +20,7 @@ public class MeetingRepositoryStub : IMeetingRepository
                 MeetingType.Live,
                 new DateTime(2000, 01, 01),
                 new DateTime(2000, 01, 02)
-                ){MeetingId = 0},
+            ){MeetingId = 0},
             new Meeting(
                 "Second",
                 "Second responsible",
@@ -48,11 +49,21 @@ public class MeetingRepositoryStub : IMeetingRepository
                 new DateTime(2002, 01, 02)
             ){MeetingId = 3}
         };
+    }
+    public List<Meeting> GetAll()
+    {
+        return _meetings;
 
     }
 
     public Meeting Create(Meeting meetingToAdd)
     {
         return meetingToAdd;
+    }
+
+    public void Delete(int id)
+    {
+        int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
+        _meetings.RemoveAt(indexInArray);
     }
 }
