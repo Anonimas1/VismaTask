@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using VismaTask.Models.Meetings;
 using VismaTask.Repositories.Meetings;
 
@@ -15,9 +16,11 @@ public class MeetingController
     }
     
     
-    public List<Meeting> GetAll()
+    public List<Meeting> GetAll(MeetingFilter filter)
     {
-        return _meetingRepository.GetAll();
+        var meetings =_meetingRepository.GetAll();
+        meetings = meetings.Where(m => filter.IsValidFor(m)).ToList();
+        return meetings;
     }
     
     public Meeting Create(Meeting meeting)
