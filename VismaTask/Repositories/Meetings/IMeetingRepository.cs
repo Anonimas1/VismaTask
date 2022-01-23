@@ -7,4 +7,6 @@ public interface IMeetingRepository
 {
     List<Meeting> GetAll();
     Meeting Create(Meeting meetingToAdd);
+
+    void Delete(int id);
 }

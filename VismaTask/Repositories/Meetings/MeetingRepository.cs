@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -39,9 +40,16 @@ public class MeetingRepository : IMeetingRepository
         int id = meetings.Count > 0 ? meetings[meetings.Count - 1].MeetingId + 1 : 1;
         meetingToAdd.MeetingId = id;
         meetings.Add(meetingToAdd);
-        string jsonString = Serialize(meetings);
-        File.WriteAllText(_filePath, jsonString);
+        WriteToFile(_filePath, meetings);
         return meetingToAdd;
+    }
+
+    public void Delete(int id)
+    {
+        var meetings = GetAll();
+        int indexInArray = meetings.FindIndex(m => m.MeetingId == id);
+        meetings.RemoveAt(indexInArray);
+        WriteToFile(_filePath, meetings);
     }
 
     private string Serialize<T>(T objToSerialize)
@@ -52,5 +60,11 @@ public class MeetingRepository : IMeetingRepository
     private T Deserialize<T>(string jsonString) where T : new()
     {
         return JsonSerializer.Deserialize<T>(jsonString) ?? new T();
+    }
+
+    private void WriteToFile<T>(string fileName, T content)
+    {
+        string jsonString = Serialize(content);
+        File.WriteAllText(fileName, jsonString);
     }
 }
