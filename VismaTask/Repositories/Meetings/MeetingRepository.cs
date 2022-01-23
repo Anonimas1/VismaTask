@@ -34,6 +34,13 @@ public class MeetingRepository : IMeetingRepository
         return Deserialize<List<Meeting>>(fileContent);
     }
 
+    public Meeting Get(int id)
+    {
+        var meetings = GetAll();
+        var index = GetIndexInCollection(id, meetings);
+        return meetings[index];
+    }
+
     public Meeting Create(Meeting meetingToAdd)
     {
         var meetings = GetAll();

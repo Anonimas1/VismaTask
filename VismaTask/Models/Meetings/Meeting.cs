@@ -32,4 +32,11 @@ public class Meeting
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public List<string> Attendees { get; set; }
+
+
+    public bool Intersects(Meeting meeting)
+    {
+        return meeting.StartDate > StartDate && meeting.StartDate < EndDate ||
+               meeting.EndDate > StartDate && meeting.EndDate < EndDate;
+    }
 }

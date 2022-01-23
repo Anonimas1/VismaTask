@@ -34,21 +34,21 @@ public class MeetingController
 
     public void Delete(int id)
     {
-        var meetings = _meetingRepository.GetAll();
-        if (_meetingService.IsResponsablePerson(_user, id, meetings))
+        var meeting = _meetingRepository.Get(id);
+        if (meeting.ResponsiblePerson.CompareTo(_user) == 0)
             _meetingRepository.Delete(id);
     }
 
     public string RemovePerson(int id, string person)
     {
-        var meetings = _meetingRepository.GetAll();
-        if (!_meetingService.IsResponsablePerson(person, id, meetings))
+        var meeting = _meetingRepository.Get(id);
+        if (meeting.ResponsiblePerson.CompareTo(_user) != 0)
         {
             _meetingRepository.RemovePerson(id, person);
             return "";
         }
         return "Could not remove person, person is the one responsible for the meeting";
     }
-    
-    
+
+
 }

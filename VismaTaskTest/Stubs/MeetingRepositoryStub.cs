@@ -56,6 +56,12 @@ public class MeetingRepositoryStub : IMeetingRepository
 
     }
 
+    public Meeting Get(int id)
+    {
+        int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
+        return _meetings[indexInArray];
+    }
+
     public Meeting Create(Meeting meetingToAdd)
     {
         return meetingToAdd;
