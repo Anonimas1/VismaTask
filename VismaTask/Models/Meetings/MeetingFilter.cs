@@ -24,7 +24,7 @@ public class MeetingFilter
                MatchesCategory(meeting.Category) &&
                MatchesType(meeting.Type) &&
                DateInRange(meeting.StartDate, meeting.EndDate) &&
-               meeting.Attendees.Count > NumberOfAttendees;
+               meeting.Attendees.Count >= NumberOfAttendees;
     }
 
     private bool DateInRange(DateTime startDate, DateTime endDate)
