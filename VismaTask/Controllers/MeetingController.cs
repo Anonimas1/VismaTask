@@ -19,4 +19,9 @@ public class MeetingController
     {
         return _meetingRepository.GetAll();
     }
+    
+    public Meeting Create(Meeting meeting)
+    {
+        return _meetingRepository.Create(meeting);
+    }
 }
