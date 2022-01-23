@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VismaTask.Models.Meetings;
 
@@ -11,4 +12,5 @@ public class Meeting
     public MeetingType Type { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public List<string> Attendees { get; set; }
 }
