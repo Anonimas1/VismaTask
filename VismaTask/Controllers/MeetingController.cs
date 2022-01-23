@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using VismaTask.Models.Meetings;
 using VismaTask.Repositories.Meetings;
+using VismaTask.Services.Meetings;
 
 namespace VismaTask.Controllers;
 
 public class MeetingController
 {
     private readonly IMeetingRepository _meetingRepository;
-    
-    public MeetingController(IMeetingRepository meetingRepository)
+    private readonly IMeetingService _meetingService;
+    private readonly string _user;
+    public MeetingController(IMeetingRepository meetingRepository, IMeetingService meetingService, string user)
     {
         _meetingRepository = meetingRepository;
+        _user = user;
+        _meetingService = meetingService;
     }
     
     
@@ -27,4 +31,15 @@ public class MeetingController
     {
         return _meetingRepository.Create(meeting);
     }
+
+    public void Delete(int id)
+    {
+        var meetings = _meetingRepository.GetAll();
+        if (_meetingService.IsResponsablePerson(_user, id, meetings))
+            _meetingRepository.Delete(id);
+    }
+    
+    public string 
+    
+    
 }
