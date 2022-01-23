@@ -10,4 +10,5 @@ public interface IMeetingRepository
     Meeting Create(Meeting meetingToAdd);
     void Delete(int id);
     void RemovePerson(int id, string person);
+    void AddPerson(int id, string person);
 }

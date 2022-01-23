@@ -6,17 +6,14 @@ namespace VismaTask.Services.Meetings;
 
 public class MeetingService : IMeetingService
 {
-    public bool PersonHasIntersectingMeetings(string person, int meetingId, List<Meeting> meetings)
+    public bool PersonHasIntersectingMeetings(string person, Meeting meetingToAddTo, IEnumerable<Meeting> meetings)
     {
-        int index = meetings.FindIndex(m => m.MeetingId == meetingId);
-        var meetingToAddPersonTo = meetings[index];
-        for (int i = 0; i < meetings.Count; i++)
+        foreach (var meeting in meetings)
         {
-            if(meetings[i].Attendees.Contains(person)) 
-                if (meetingToAddPersonTo.Intersects(meetings[i]) && i != index)
+            if(meeting.Attendees.Contains(person))
+                if (meetingToAddTo.Intersects(meeting) && meetingToAddTo.MeetingId != meeting.MeetingId)
                     return true;
         }
-
         return false;
     }
     

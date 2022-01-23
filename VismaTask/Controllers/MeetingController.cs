@@ -26,6 +26,11 @@ public class MeetingController
         meetings = meetings.Where(m => filter.IsValidFor(m)).ToList();
         return meetings;
     }
+
+    public Meeting Get(int id)
+    {
+        return _meetingRepository.Get(id);
+    }
     
     public Meeting Create(Meeting meeting)
     {

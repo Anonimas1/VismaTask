@@ -67,6 +67,14 @@ public class MeetingRepository : IMeetingRepository
         WriteToFile(_filePath, meetings);
     }
 
+    public void AddPerson(int id, string person)
+    {
+        var meetings = GetAll();
+        int indexInArray = GetIndexInCollection(id, meetings);
+        meetings[indexInArray].Attendees.Add(person);
+        WriteToFile(_filePath, meetings);
+    }
+
     private string Serialize<T>(T objToSerialize)
     {
         return JsonSerializer.Serialize(objToSerialize, _serializerOptions);

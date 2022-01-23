@@ -14,40 +14,36 @@ public class MeetingRepositoryStub : IMeetingRepository
         {
             new Meeting(
                 "First",
-                "Admin",
                 "First description",
                 MeetingCategory.Hub,
                 MeetingType.Live,
                 new DateTime(2000, 01, 01),
                 new DateTime(2000, 01, 02)
-            ){MeetingId = 0},
+            ){MeetingId = 0, ResponsiblePerson = "Admin"},
             new Meeting(
                 "Second",
-                "Second responsible",
                 "Second description",
                 MeetingCategory.Short,
                 MeetingType.Live,
                 new DateTime(2001, 01, 01),
                 new DateTime(2001, 01, 02)
-            ){MeetingId = 1},
+            ){MeetingId = 1, ResponsiblePerson = "Second responsible"},
             new Meeting(
                 "Third",
-                "Third responsible",
                 "Third description",
                 MeetingCategory.Short,
                 MeetingType.Live,
                 new DateTime(2002, 01, 01),
                 new DateTime(2002, 01, 02)
-            ){MeetingId = 2},
+            ){MeetingId = 2, ResponsiblePerson = "Third responsible"},
             new Meeting(
                 "Fourth",
-                "Admin",
                 "Fourth description",
                 MeetingCategory.Short,
                 MeetingType.InPerson,
                 new DateTime(2002, 01, 01),
                 new DateTime(2002, 01, 02)
-            ){MeetingId = 3}
+            ){MeetingId = 3, ResponsiblePerson = "Admin"}
         };
     }
     public List<Meeting> GetAll()
@@ -77,5 +73,11 @@ public class MeetingRepositoryStub : IMeetingRepository
     {
         int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
         _meetings[indexInArray].Attendees.Remove(person);
+    }
+
+    public void AddPerson(int id, string person)
+    {
+        int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
+        _meetings[indexInArray].Attendees.Add(person);
     }
 }

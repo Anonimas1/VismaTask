@@ -12,14 +12,14 @@ public class MeetingFilterTest
     private string _description = "Word1 Word2 word3";
     private MeetingCategory _category = MeetingCategory.Hub;
     private MeetingType _type = MeetingType.Live;
-    private DateTime _startDate = new DateTime(2000, 01, 01);
-    private DateTime _endDate = new DateTime(2000, 01, 02);
-    private List<string> _attendees = new List<string>() { "one", "two", "three" };
+    private readonly DateTime _startDate = new DateTime(2000, 01, 01);
+    private readonly DateTime _endDate = new DateTime(2000, 01, 02);
+    private readonly List<string> _attendees = new List<string>() { "one", "two", "three" };
 
     [Fact]
-    public void IsValidFor_ResponsablePersonSet_ReturnsFalse()
+    public void IsValidFor_ResponsiblePersonSet_ReturnsFalse()
     {
-        var meetingFilter = new MeetingFilter() { ResponsiblePerson = "BAD RESPONSABLE NAME" };
+        var meetingFilter = new MeetingFilter() { ResponsiblePerson = "BAD RESPONSIBLE NAME" };
         var meeting = FakeMeeting();
 
         var actual = meetingFilter.IsValidFor(meeting);
@@ -28,7 +28,7 @@ public class MeetingFilterTest
     }
 
     [Fact]
-    public void IsValidFor_ResponsablePersonSet_ReturnsTrue()
+    public void IsValidFor_ResponsiblePersonSet_ReturnsTrue()
     {
         var meetingFilter = new MeetingFilter() { ResponsiblePerson = _responsiblePerson };
         var meeting = FakeMeeting();
@@ -231,9 +231,12 @@ public class MeetingFilterTest
 
     private Meeting FakeMeeting()
     {
-        var meeting = new Meeting(_meetingName, _responsiblePerson, _description, _category, _type, _startDate,
-            _endDate);
-        meeting.Attendees = _attendees;
+        var meeting = new Meeting(_meetingName, _description, _category, _type, _startDate,
+            _endDate)
+        {
+            Attendees = _attendees,
+            ResponsiblePerson = _responsiblePerson
+        };
         return meeting;
     }
 }

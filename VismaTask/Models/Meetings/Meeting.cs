@@ -7,7 +7,6 @@ public class Meeting
 {
     public Meeting(){}
     public Meeting(string name,
-        string responsiblePerson,
         string description,
         MeetingCategory category,
         MeetingType type,
@@ -15,7 +14,6 @@ public class Meeting
         DateTime endDate)
     {
         Name = name;
-        ResponsiblePerson = responsiblePerson;
         Description = description;
         Category = category;
         Type = type;
@@ -38,5 +36,23 @@ public class Meeting
     {
         return meeting.StartDate > StartDate && meeting.StartDate < EndDate ||
                meeting.EndDate > StartDate && meeting.EndDate < EndDate;
+    }
+
+    public override string ToString()
+    {
+        string resultString = $"Meeting id: {MeetingId}\n" +
+                              $"Meeting name: {Name}\n" +
+                              $"Responsible person: {ResponsiblePerson}\n" +
+                              $"Description: {Description}\n" +
+                              $"Category: {Category}\n" +
+                              $"Type: {Type}\n" +
+                              $"Start date: {StartDate}\n" +
+                              $"End date: {EndDate}\n" +
+                              "Atendees:\n";
+        foreach (var attendee in Attendees)
+        {
+            resultString = resultString + $"     {attendee}\n";
+        }
+        return resultString;
     }
 }
