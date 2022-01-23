@@ -58,4 +58,16 @@ public class MeetingControllerTest : IDisposable
         Assert.Equal(listFormRepository.Count, actual.Count);
     }
 
+    [Fact]
+    public void Get_ReturnsCorrectElement()
+    {
+        int id = 1;
+        var repositoryStub = new MeetingRepositoryStub();
+        var meetingFromRepository = repositoryStub.Get(id);
+
+        var actual = _controller.Get(id);
+        
+        Assert.Equal(meetingFromRepository, actual);
+    }
+
 }
