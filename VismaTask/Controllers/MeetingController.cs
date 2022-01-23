@@ -59,6 +59,10 @@ public class MeetingController
         if (meeting.ResponsiblePerson.CompareTo(person) != 0)
         {
             _meetingRepository.RemovePerson(id, person);
+            return "Removed\n";
+        }
+        return "Could not remove person, person is the one responsible for the meeting\n";
+    }
             return "";
         }
         return "Could not remove person, person is the one responsible for the meeting";
