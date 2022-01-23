@@ -47,8 +47,16 @@ public class MeetingRepository : IMeetingRepository
     public void Delete(int id)
     {
         var meetings = GetAll();
-        int indexInArray = meetings.FindIndex(m => m.MeetingId == id);
+        int indexInArray = GetIndexInCollection(id, meetings);
         meetings.RemoveAt(indexInArray);
+        WriteToFile(_filePath, meetings);
+    }
+
+    public void RemovePerson(int id, string person)
+    {
+        var meetings = GetAll();
+        int indexInArray = GetIndexInCollection(id, meetings);
+        meetings[indexInArray].Attendees.Remove(person);
         WriteToFile(_filePath, meetings);
     }
 
@@ -66,5 +74,10 @@ public class MeetingRepository : IMeetingRepository
     {
         string jsonString = Serialize(content);
         File.WriteAllText(fileName, jsonString);
+    }
+
+    private int GetIndexInCollection(int meetingId, List<Meeting> meetings)
+    {
+        return meetings.FindIndex(m => m.MeetingId == meetingId);
     }
 }

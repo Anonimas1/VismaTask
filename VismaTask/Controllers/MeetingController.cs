@@ -38,8 +38,17 @@ public class MeetingController
         if (_meetingService.IsResponsablePerson(_user, id, meetings))
             _meetingRepository.Delete(id);
     }
-    
-    public string 
+
+    public string RemovePerson(int id, string person)
+    {
+        var meetings = _meetingRepository.GetAll();
+        if (!_meetingService.IsResponsablePerson(person, id, meetings))
+        {
+            _meetingRepository.RemovePerson(id, person);
+            return "";
+        }
+        return "Could not remove person, person is the one responsible for the meeting";
+    }
     
     
 }
