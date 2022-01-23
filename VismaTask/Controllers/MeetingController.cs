@@ -39,7 +39,6 @@ public class MeetingController
         return _meetingRepository.Create(meeting);
     }
 
-    public void Delete(int id)
     public string Delete(int id)
     {
         var meeting = _meetingRepository.Get(id);
@@ -55,7 +54,6 @@ public class MeetingController
     public string RemovePerson(int id, string person)
     {
         var meeting = _meetingRepository.Get(id);
-        if (meeting.ResponsiblePerson.CompareTo(_user) != 0)
         if (meeting.ResponsiblePerson.CompareTo(person) != 0)
         {
             _meetingRepository.RemovePerson(id, person);
@@ -75,7 +73,6 @@ public class MeetingController
                 return "This person has intersecting meetings\n";
             return "";
         }
-        return "Could not remove person, person is the one responsible for the meeting";
         return "This person is already present\n";
     }
 
