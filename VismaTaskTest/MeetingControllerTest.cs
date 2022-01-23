@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using VismaTask.Controllers;
 using VismaTask.Models.Meetings;
+using VismaTask.Services.Meetings;
 using VismaTaskTest.Stubs;
 using Xunit;
 
@@ -14,7 +15,7 @@ public class MeetingControllerTest : IDisposable
     
     public MeetingControllerTest()
     {
-        _controller = new MeetingController(new MeetingRepositoryStub(), "Admin");
+        _controller = new MeetingController(new MeetingRepositoryStub(), new MeetingService(), "Admin");
     }
 
     public void Dispose()
