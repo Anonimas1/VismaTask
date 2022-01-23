@@ -67,7 +67,7 @@ public class MeetingControllerTest : IDisposable
 
         var actual = _controller.Get(id);
         
-        Assert.Equal(meetingFromRepository, actual);
+        Assert.Equal(meetingFromRepository.MeetingId, actual.MeetingId);
     }
 
 }
