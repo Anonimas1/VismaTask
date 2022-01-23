@@ -38,10 +38,16 @@ public class MeetingController
     }
 
     public void Delete(int id)
+    public string Delete(int id)
     {
         var meeting = _meetingRepository.Get(id);
         if (meeting.ResponsiblePerson.CompareTo(_user) == 0)
+        {
             _meetingRepository.Delete(id);
+            return "Deleted\n";
+        }
+
+        return "Only the person responsible for the meeting can delete it\n";
     }
 
     public string RemovePerson(int id, string person)
