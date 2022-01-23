@@ -23,7 +23,7 @@ public class Meeting
         EndDate = endDate;
         Attendees = new List<string>();
     }
-
+    public int MeetingId { get; set; }
     public string Name { get; set; }
     public string ResponsiblePerson { get; set; }
     public string Description { get; set; }

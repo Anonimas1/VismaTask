@@ -13,13 +13,13 @@ public class MeetingRepositoryStub : IMeetingRepository
         {
             new Meeting(
                 "First",
-                "First responsible",
+                "Admin",
                 "First description",
                 MeetingCategory.Hub,
                 MeetingType.Live,
                 new DateTime(2000, 01, 01),
                 new DateTime(2000, 01, 02)
-                ),
+                ){MeetingId = 0},
             new Meeting(
                 "Second",
                 "Second responsible",
@@ -28,7 +28,7 @@ public class MeetingRepositoryStub : IMeetingRepository
                 MeetingType.Live,
                 new DateTime(2001, 01, 01),
                 new DateTime(2001, 01, 02)
-            ),
+            ){MeetingId = 1},
             new Meeting(
                 "Third",
                 "Third responsible",
@@ -37,16 +37,16 @@ public class MeetingRepositoryStub : IMeetingRepository
                 MeetingType.Live,
                 new DateTime(2002, 01, 01),
                 new DateTime(2002, 01, 02)
-            ),
+            ){MeetingId = 2},
             new Meeting(
                 "Fourth",
-                "Fourth responsible",
+                "Admin",
                 "Fourth description",
                 MeetingCategory.Short,
                 MeetingType.InPerson,
                 new DateTime(2002, 01, 01),
                 new DateTime(2002, 01, 02)
-            )
+            ){MeetingId = 3}
         };
 
     }

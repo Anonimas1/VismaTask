@@ -36,6 +36,8 @@ public class MeetingRepository : IMeetingRepository
     public Meeting Create(Meeting meetingToAdd)
     {
         var meetings = GetAll();
+        int id = meetings.Count > 0 ? meetings[meetings.Count - 1].MeetingId + 1 : 1;
+        meetingToAdd.MeetingId = id;
         meetings.Add(meetingToAdd);
         string jsonString = Serialize(meetings);
         File.WriteAllText(_filePath, jsonString);
