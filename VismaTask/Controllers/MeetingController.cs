@@ -63,9 +63,20 @@ public class MeetingController
         }
         return "Could not remove person, person is the one responsible for the meeting\n";
     }
+
+    public string AddPerson(int id, string person)
+    {
+        var meeting = _meetingRepository.Get(id);
+        var meetings = _meetingRepository.GetAll();
+        if (!meeting.Attendees.Contains(person))
+        {
+            _meetingRepository.AddPerson(id, person);
+            if (_meetingService.PersonHasIntersectingMeetings(person, meeting, meetings))
+                return "This person has intersecting meetings\n";
             return "";
         }
         return "Could not remove person, person is the one responsible for the meeting";
+        return "This person is already present\n";
     }
 
 
