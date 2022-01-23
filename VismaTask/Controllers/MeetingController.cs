@@ -34,6 +34,8 @@ public class MeetingController
     
     public Meeting Create(Meeting meeting)
     {
+        meeting.ResponsiblePerson = _user;
+        meeting.Attendees.Add(_user);
         return _meetingRepository.Create(meeting);
     }
 
