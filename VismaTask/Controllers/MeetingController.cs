@@ -56,6 +56,7 @@ public class MeetingController
     {
         var meeting = _meetingRepository.Get(id);
         if (meeting.ResponsiblePerson.CompareTo(_user) != 0)
+        if (meeting.ResponsiblePerson.CompareTo(person) != 0)
         {
             _meetingRepository.RemovePerson(id, person);
             return "";
