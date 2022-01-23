@@ -66,4 +66,10 @@ public class MeetingRepositoryStub : IMeetingRepository
         int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
         _meetings.RemoveAt(indexInArray);
     }
+
+    public void RemovePerson(int id, string person)
+    {
+        int indexInArray = _meetings.FindIndex(m => m.MeetingId == id);
+        _meetings[indexInArray].Attendees.Remove(person);
+    }
 }
